@@ -1,0 +1,57 @@
+{
+  "name": "pluginever/autocomplete-orders-for-woocommerce",
+  "description": "The plugin enables the store orders to be automatically completed depending on various conditions.",
+  "homepage": "https://pluginever.com/",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "prefer-stable": true,
+  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "url": "git@github.com:byteever/bytekit-plugin.git",
+      "type": "github"
+    }
+  ],
+  "require-dev": {
+    "byteever/byteever-sniffs": "dev-master",
+    "coenjacobs/mozart": "^0.7.1",
+    "byteever/bytekit-plugin": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "AutocompleteOrdersForWooCommerce\\": ["includes/", "lib/"]
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true,
+    "allow-plugins": {
+      "composer/*": true,
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "\"vendor/bin/mozart\" compose",
+      "composer dump-autoload"
+    ],
+    "post-update-cmd": [
+      "\"vendor/bin/mozart\" compose",
+      "composer dump-autoload"
+    ],
+    "phpcs": "@php ./vendor/bin/phpcs --standard=phpcs.xml -s -v",
+    "phpcbf": "@php ./vendor/bin/phpcbf --standard=phpcs.xml -v"
+  },
+  "extra": {
+    "mozart": {
+      "dep_namespace": "AutocompleteOrdersForWooCommerce\\",
+      "dep_directory": "/lib/",
+      "classmap_directory": "/lib/classes/",
+      "classmap_prefix": "AutocompleteOrdersForWooCommerce_",
+      "delete_vendor_directories": true,
+      "packages": [
+        "byteever/bytekit-plugin"
+      ]
+    }
+  }
+}
